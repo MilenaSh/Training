@@ -1,0 +1,7 @@
+F:\Milena\Study\OOP\OOPTraining\OOPTraining\bin\Debug\OOPTraining.exe.config
+F:\Milena\Study\OOP\OOPTraining\OOPTraining\bin\Debug\OOPTraining.exe
+F:\Milena\Study\OOP\OOPTraining\OOPTraining\bin\Debug\OOPTraining.pdb
+F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.csprojResolveAssemblyReference.cache
+F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.csproj.CoreCompileInputs.cache
+F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.exe
+F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.pdb
