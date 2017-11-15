@@ -5,3 +5,6 @@ F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.csprojResolveA
 F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.csproj.CoreCompileInputs.cache
 F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.exe
 F:\Milena\Study\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.pdb
+C:\Users\Milena\Desktop\TrainingA-triks\Training\OOP\OOPTraining\OOPTraining\bin\Debug\OOPTraining.exe.config
+C:\Users\Milena\Desktop\TrainingA-triks\Training\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.exe
+C:\Users\Milena\Desktop\TrainingA-triks\Training\OOP\OOPTraining\OOPTraining\obj\Debug\OOPTraining.pdb

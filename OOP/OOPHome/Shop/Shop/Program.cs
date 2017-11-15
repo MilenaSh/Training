@@ -13,7 +13,6 @@ namespace Shop
             var myPhone = new PhoneDevice("Nokia", 200, true, Shop.Enum.DeviceType.Phone);
 
             Console.WriteLine(myPhone.ToString());
-
         }
     }
 }

@@ -13,5 +13,4 @@ namespace Shop.Enum
         Tablet = 3
     }
 
-
 }
