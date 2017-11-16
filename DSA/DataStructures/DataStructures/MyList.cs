@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,26 +7,71 @@ using System.Threading.Tasks;
 
 namespace DataStructures
 {
-    public class MyList<T>
+    public class MyList<T1, T2> : IDictionary<T1, T2>
     {
-        private const int InitialSize = 4;
-        private const int Multiplier = 2;
+        public T2 this[T1 key] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        private int size;
-        private T[] arr;
+        public ICollection<T1> Keys => throw new NotImplementedException();
 
-        public int Length { get; set; }
+        public ICollection<T2> Values => throw new NotImplementedException();
 
+        public int Count => throw new NotImplementedException();
 
-        public MyList()
+        public bool IsReadOnly => throw new NotImplementedException();
+
+        public void Add(T1 key, T2 value)
         {
-            size = InitialSize;
-            arr = new T[size];
-            Length = 0;
+            throw new NotImplementedException();
         }
 
-        //public void Add()
+        public void Add(KeyValuePair<T1, T2> item)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
 
+        public bool Contains(KeyValuePair<T1, T2> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ContainsKey(T1 key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(KeyValuePair<T1, T2>[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<KeyValuePair<T1, T2>> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(T1 key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(KeyValuePair<T1, T2> item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TryGetValue(T1 key, out T2 value)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
