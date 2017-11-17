@@ -52,7 +52,7 @@ namespace DataStructures
         }
 
         // Count Length - property only with get
-        public int Count => throw new NotImplementedException();
+       // public int Count => throw new NotImplementedException();
 
         public List2()
         {
@@ -80,8 +80,6 @@ namespace DataStructures
             currentLength++;
         }
 
-        // Add new resize method that accepts multiplier
-
         // Add range method - at the end
         public void AddRange(IEnumerable<T> collection)
         {
@@ -100,32 +98,40 @@ namespace DataStructures
         // Deletes all items and resets size to the default
         public void Clear()
         {
-            // delete all values
-
-            // reset array to initial size
-
             //2 / create new array with initial size
+            T[] tempArr = new T[this.internalSize];
 
             // assign to current arr
+            this.arr = tempArr;
 
             // change current length
-
-            throw new NotImplementedException();
+            currentLength = 0;          
         }
 
         // If it contains the given value
         public bool Contains(T item)
         {
+            if (IndexOf(item) == -1)
+            {
+                return false;
+            }
             // if indexof = -1 -> return false
-            throw new NotImplementedException();
+            return true;         
         }
 
         // Index of the given value
         public int IndexOf(T item)
         {
+            int result = -1;
             // return index of matching value
-
-            throw new NotImplementedException();
+            for (int i = 0; i < this.currentLength; i++)
+            {
+                if (this.arr[i].ToString() == item.ToString())
+                {
+                    result = i;
+                }
+            }
+            return result;
         }
 
         // Delete
@@ -162,5 +168,27 @@ namespace DataStructures
         }
 
         // New resize method with Multiplier as input
+
+        //to change to private
+        public void ResizeCollection(int inputMultiplier)
+        {
+            // change internal this.size
+            this.internalSize = this.internalSize * inputMultiplier;
+
+            // initialize new array with new internal size
+            T[] tempArr = new T[this.internalSize];
+
+            // coppy current arr into new array
+            for (int i = 0; i < currentLength; i++)
+            {
+                tempArr[i] = this.arr[i];
+            }
+
+            // assign the new array to be the current arr
+            this.arr = tempArr;
+
+
+        }
+
     }
 }

@@ -33,31 +33,40 @@ namespace DataStructures
 
             //myList.Add("Sample string");
 
-            //var testList = new List2<string>();
+            var testList = new List2<string>();
+
+            //testList.ResizeCollection(10);
+
+            testList.Add("Sample string");
+
+            Console.WriteLine(testList.IndexOf("Testing"));
+
+            Console.WriteLine(testList.Contains("Sample string"));
+
+            testList.Clear();
 
             //Console.WriteLine(testList);
 
-            //testList.Add("Sample string");
 
-            //Console.WriteLine(testList);
-            var test = new HashSet<string>();
-            var list = new List<TestClas>();
-            for (int i = 0; i < 20; i++)
-            {
-                list.Add(new TestClas
-                {
-                    Id = i,
-                    Name = "Name " + i,
-                    Price = 20 * i
-                });
-            }
 
-            var result = list
-                .Where(x => x.Price < 300)
-                .GroupBy(x => x.Name)
-                .Select(x=>)
+            //var test = new HashSet<string>();
+            //var list = new List<TestClas>();
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    list.Add(new TestClas
+            //    {
+            //        Id = i,
+            //        Name = "Name " + i,
+            //        Price = 20 * i
+            //    });
+            //}
 
-            var t = 5;
+            //var result = list
+            //    .Where(x => x.Price < 300)
+            //    .GroupBy(x => x.Name)
+            //    .Select(x =>);
+
+            //var t = 5;
         } 
     }
 }
