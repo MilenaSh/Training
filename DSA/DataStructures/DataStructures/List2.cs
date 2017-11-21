@@ -87,7 +87,18 @@ namespace DataStructures
             // determin how big internal size is needed
             int collectionSize = collection.Count();
 
+            // determin multiplier
+            var initialInternalSize = internalSize;
+            var multiplier = 1;
+
+            while (this.internalSize < (collectionSize + initialInternalSize))
+            {
+                multiplier += 1;
+                ResizeCollection(multiplier);
+            }
+
             // call new resize method
+            ResizeCollection(multiplier);
 
             // add each item of the collection
 
