@@ -38,10 +38,22 @@ namespace DataStructures
             //testList.ResizeCollection(10);
 
             testList.Add("Sample string");
+            testList.Add("Sample string1");
+            testList.Add("Sample string2");
+            testList.Add("Sample string3");
 
-            Console.WriteLine(testList.IndexOf("Testing"));
+            
 
-            Console.WriteLine(testList.Contains("Sample string"));
+           Console.WriteLine( testList.Remove("Sample string2"));
+
+           
+
+            testList.IndexOf("Sample string");
+        
+
+            // Console.WriteLine(testList.IndexOf("Sample string"));
+
+           //  Console.WriteLine(testList.Contains("Sample string"));
 
             testList.Clear();
 
@@ -67,6 +79,15 @@ namespace DataStructures
             //    .Select(x =>);
 
             //var t = 5;
-        } 
+
+            // create custom dictionaries
+
+           // var myTestDictionary = new MyDictionary<string, string>();
+           // myTestDictionary.Add("Milena", "5");
+          //  myTestDictionary.Add("Plamen", "6");
+
+          //  Console.WriteLine(myTestDictionary);
+
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace DataStructures
         }
 
         // Count Length - property only with get
-       // public int Count => throw new NotImplementedException();
+        // public int Count => throw new NotImplementedException();
 
         public List2()
         {
@@ -84,8 +84,8 @@ namespace DataStructures
         public void AddRange(IEnumerable<T> collection)
         {
             // adds more than one item
-
             // determin how big internal size is needed
+            int collectionSize = collection.Count();
 
             // call new resize method
 
@@ -105,7 +105,7 @@ namespace DataStructures
             this.arr = tempArr;
 
             // change current length
-            currentLength = 0;          
+            currentLength = 0;
         }
 
         // If it contains the given value
@@ -116,7 +116,7 @@ namespace DataStructures
                 return false;
             }
             // if indexof = -1 -> return false
-            return true;         
+            return true;
         }
 
         // Index of the given value
@@ -137,15 +137,62 @@ namespace DataStructures
         // Delete
         public bool Remove(T item)
         {
+            bool result = false;
+            var tempArr = new T[this.internalSize];
+            var myArr = this.arr;
+
             // get index of item
+            var index = IndexOf(item);
 
             // if index >=0 shift positions
+            if (index == 0)
+            {
+                for (int i = 1; i < myArr.Length; i++)
+                {
+                    tempArr[i - 1] = myArr[i];
+                    myArr[i - 1] = tempArr[i - 1];
+                }
+                result = true;
+                this.arr = tempArr;
 
-            // change length 
+                // change length 
+                currentLength = currentLength - 1;
+                var lastArr = new T[currentLength];
+
+                for (int i = 0; i < currentLength; i++)
+                {
+                    lastArr[i] = this.arr[i];
+                }
+                this.arr = lastArr;
+            }
+
+            if (index > 0)
+            {
+                for (int i = 0; i < index; i++)
+                {
+                    tempArr[i] = myArr[i];
+                }
+                for (int i = index; i < myArr.Length - 1; i++)
+                {
+                    tempArr[i] = myArr[i + 1];
+                }
+                result = true;
+                this.arr = tempArr;
+
+                // change length 
+                currentLength = currentLength - 1;
+                var lastArr = new T[currentLength];
+
+                for (int i = 0; i < currentLength; i++)
+                {
+                    lastArr[i] = this.arr[i];
+                }
+                this.arr = lastArr;
+            }
 
             // check if currentLength >= internal size / multiplier
 
-            throw new NotImplementedException();
+            return result;
         }
 
         //Doubles the size of the array and copy the new value
