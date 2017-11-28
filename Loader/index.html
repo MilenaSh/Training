@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+
+<style>
+
+</style>
+
+<body>
+    <progress id="progressBar" value="0" , max="100">  </progress>
+    <span id="status"></span>
+    <h1 id="message"></h1>
+
+    <script>
+        function progressLoad(valueLoaded) {
+            var bar = $("#progressBar");
+            var status = $("#status");
+
+            status.html(valueLoaded + "%");
+            bar.val(valueLoaded);
+            valueLoaded++;
+            var loading = setTimeout(function() {
+                progressLoad(valueLoaded);
+
+                if (valueLoaded == 100) {
+                    status.html("100%");
+                    bar.val(100);
+                    clearTimeout(loading);
+                    $("#message").html("Progress loaded")
+                }
+            }, 100);
+
+        }
+        var initialValue = 25;
+        progressLoad(initialValue);
+    </script>
+</body>
+
+</html>
