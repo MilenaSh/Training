@@ -1,0 +1,41 @@
+﻿@using MVCExample.Web.Models.Cities
+
+@model IEnumerable<CityViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>City Name</td>
+            <td>City Population</td>
+            <td>Superheroes Living there</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", new { Id = item.Id })
+                </td>
+                <td>
+                    @item.Population
+                </td>
+                <td>
+                    @item.SuperheroCount
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+
+
+

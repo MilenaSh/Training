@@ -51,7 +51,8 @@ namespace DataStructures
             }
         }
 
-        // Count Length - property only with get
+        // Count Length - property only with get - TODO
+
         // public int Count => throw new NotImplementedException();
 
         public List2()
@@ -77,7 +78,7 @@ namespace DataStructures
             this.arr[index] = item;
 
             // increase currentLength
-            currentLength++;
+            this.currentLength++;
         }
 
         // Add range method - at the end
@@ -88,21 +89,23 @@ namespace DataStructures
             int collectionSize = collection.Count();
 
             // determin multiplier
-            var initialInternalSize = internalSize;
+            var initialInternalSize = this.internalSize;
             var multiplier = 1;
 
-            while (this.internalSize < (collectionSize + initialInternalSize))
+            while (this.internalSize * multiplier <= (collectionSize + this.currentLength))
             {
-                multiplier += 1;
-                ResizeCollection(multiplier);
+                multiplier *= 2;
             }
-
-            // call new resize method
+           
+            // call new resize method // 32
             ResizeCollection(multiplier);
 
             // add each item of the collection
-
-            // change current length
+            foreach (var item in collection)
+            {
+                this.arr[this.currentLength] = item;
+                this.currentLength++;
+            }
 
         }
 
@@ -155,51 +158,71 @@ namespace DataStructures
             // get index of item
             var index = IndexOf(item);
 
+            if (index < 0)
+            {
+                return false;
+            }
+
+            // shift all to left from given position
+
+            // determin the first item that needs to be shifted
+
+            // make loop to the end of the array
+
+            var firstIndex = index + 1;
+
+            for (int i = firstIndex; i < this.currentLength; i++)
+            {
+                this.arr[i - 1] = this.arr[i];
+            }
+
+            this.currentLength--;
             // if index >=0 shift positions
-            if (index == 0)
-            {
-                for (int i = 1; i < myArr.Length; i++)
-                {
-                    tempArr[i - 1] = myArr[i];
-                    myArr[i - 1] = tempArr[i - 1];
-                }
-                result = true;
-                this.arr = tempArr;
 
-                // change length 
-                currentLength = currentLength - 1;
-                var lastArr = new T[currentLength];
+            //if (index == 0)
+            //{
+            //    for (int i = 1; i < myArr.Length; i++)
+            //    {
+            //        tempArr[i - 1] = myArr[i];
+            //        myArr[i - 1] = tempArr[i - 1];
+            //    }
+            //    result = true;
+            //    this.arr = tempArr;
 
-                for (int i = 0; i < currentLength; i++)
-                {
-                    lastArr[i] = this.arr[i];
-                }
-                this.arr = lastArr;
-            }
+            //    // change length 
+            //    currentLength = currentLength - 1;
+            //    var lastArr = new T[currentLength];
 
-            if (index > 0)
-            {
-                for (int i = 0; i < index; i++)
-                {
-                    tempArr[i] = myArr[i];
-                }
-                for (int i = index; i < myArr.Length - 1; i++)
-                {
-                    tempArr[i] = myArr[i + 1];
-                }
-                result = true;
-                this.arr = tempArr;
+            //    for (int i = 0; i < currentLength; i++)
+            //    {
+            //        lastArr[i] = this.arr[i];
+            //    }
+            //    this.arr = lastArr;
+            //}
 
-                // change length 
-                currentLength = currentLength - 1;
-                var lastArr = new T[currentLength];
+            //if (index > 0)
+            //{
+            //    for (int i = 0; i < index; i++)
+            //    {
+            //        tempArr[i] = myArr[i];
+            //    }
+            //    for (int i = index; i < myArr.Length - 1; i++)
+            //    {
+            //        tempArr[i] = myArr[i + 1];
+            //    }
+            //    result = true;
+            //    this.arr = tempArr;
 
-                for (int i = 0; i < currentLength; i++)
-                {
-                    lastArr[i] = this.arr[i];
-                }
-                this.arr = lastArr;
-            }
+            //    // change length 
+            //    currentLength = currentLength - 1;
+            //    var lastArr = new T[currentLength];
+
+            //    for (int i = 0; i < currentLength; i++)
+            //    {
+            //        lastArr[i] = this.arr[i];
+            //    }
+            //    this.arr = lastArr;
+            //}
 
             // check if currentLength >= internal size / multiplier
 
@@ -244,7 +267,6 @@ namespace DataStructures
 
             // assign the new array to be the current arr
             this.arr = tempArr;
-
 
         }
 

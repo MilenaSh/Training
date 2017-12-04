@@ -1,0 +1,29 @@
+﻿@model MVCExample.Web.Models.Cities.CityCreateViewModel
+
+<style>
+    .label {
+        color: black;
+    }
+</style>
+
+<h1>Create </h1>
+
+@using (Html.BeginForm("Create", "Cities", FormMethod.Post, new { id = "create-city", encoding = "multipart/form-data", enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+
+        @Html.LabelFor(m => Model.Name, "City Name", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.TextBoxFor(m => Model.Name, htmlAttributes: new { @class = "text-input" })
+        @*</div>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => Model.Population, "City Population", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.TextBoxFor(m => Model.Population, htmlAttributes: new { @class = "text-input", @type = "number" })
+        @*</div>*@
+    </div>
+    <input type="submit" name="Create" value="Create" />
+
+}
+

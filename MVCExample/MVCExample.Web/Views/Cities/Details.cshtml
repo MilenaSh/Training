@@ -1,0 +1,17 @@
+﻿@using MVCExample.Web.Models.Cities
+
+@model CityDetailedViewModel
+
+<div>
+    <h1> City name: @Model.Name</h1>
+    <p> Current population is: @Model.Population</p>
+    @if (Model.SuperheroCount > 0)
+    {
+        <p> @Model.SuperheroCount superheroe/s live in me </p>
+    }
+    else
+    {
+        <p>There are currently no superheroes living in me. </p>
+    }
+
+</div>

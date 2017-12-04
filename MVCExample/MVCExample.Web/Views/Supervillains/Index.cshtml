@@ -1,0 +1,54 @@
+﻿@using MVCExample.Web.Models.Supervillains
+
+@model IEnumerable<SuperVillainViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+
+</p>
+<table>
+        <thead>
+            <tr>
+                <th>Supervillain Name</th>
+                <th>Supervillain Name</th>
+                <th>Is Alien?</th>
+                <th>Real Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", new { Id = item.Id })
+                    </td>
+                    <td>
+                        @{
+                            var href = $"/Supervillains/{item.Id}";
+                        }
+                        <a href="@href">
+                            @item.Name
+                        </a>
+                    </td>
+                    <th>@item.IsAlien</th>
+                    <th>@item.RealName</th>
+                </tr>
+                            }
+        </tbody>
+    </table>
+
+<body>
+    @*@Html.DisplayForModel()*@
+
+    @*@for (int index = 0; index < Model.Count(); index++)
+    {
+        @Html.DisplayFor(model => model.Name)
+    }*@
+</body>
+
+
