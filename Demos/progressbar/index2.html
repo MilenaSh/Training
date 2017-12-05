@@ -7,7 +7,19 @@
     <title>Document</title>
 
     <style>
+
+    .main-container {
+            position: relative;
+            z-index: -1;
+        }
+
+    .bar-container {
+        position: absolute;
+        z-index: -1;
+    }
+    
     .progress-container {
+        position: absolute;
         margin: 0;
         padding: 0;
         width: 300px;
@@ -16,14 +28,16 @@
         white-space: nowrap; 
         font-size: 0;
         border-radius: 5px;
+        display: inline-block;
     }
 
     .progress-bar {
+        text-align: center;
         display: inline-block;
         width: 0%;
         height: 100%;
         background-color: #3A73B0;
-        font-size: 16px;
+        font-size: 14px;
         color: white;
     }
 
@@ -31,6 +45,24 @@
         height: 100%;
         display: inline-block;
         white-space: nowrap; 
+        z-index: -1;
+    }
+
+    .progress-label {
+        margin: 0px;
+        padding: 0px;
+        padding-top: 2px;
+        padding-left: 5px;
+        height: 100%;
+        font-size: 14px;
+        color: white;
+        z-index: 1;
+    }
+
+    .progress-message {
+        margin-top: 10px;
+        margin-left: 5px;
+        color: #45454A;
     }
 
     .activation {
@@ -38,10 +70,10 @@
         animation-duration: 4s;
         animation-play-state: paused;
         animation-fill-mode: forwards;
-       /* -webkit-animation-name: progress-bar;
+        /* -webkit-animation-name: progress-bar;
         -webkit-animation-duration: 4s;
         -webkit-animation-play-state: paused;
-        -webkit-animation-fill-mode: forwards; */
+        -webkit-animation-fill-mode: forwards;  */
     }
 
     .button {
@@ -86,14 +118,34 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>     
 
-    <ul id="bar" class="progress-container" data-currentIndx = "1">
-            <li class="section" data-section="1"  style="width:50%; height:100%;"><div class="progress-bar"></div></li>
-            <li class="section" data-section="2" style="width:50%; height:100%"><div class="progress-bar"></div></li>
-    </ul>
 
-    <div class="button" data-pauseanim="bar">Pause</div>
+<!-- <div class="main-container">
+    <div class="bar-container">
+    <ul id="bar" class="progress-container" data-currentIndx = "1">
+            <li class="section" data-section="1"  style="width:25%; height:100%;"><div class="progress-bar"></div></li>
+            <li class="section" data-section="2" style="width:25%; height:100%"><div class="progress-bar"></div></li>
+            <li class="section" data-section="3" style="width:25%; height:100%"><div class="progress-bar"></div></li>
+            <li class="section" data-section="4" style="width:25%; height:100%"><div class="progress-bar"></div></li>           
+    </ul>
+</div>
+    <div class="progress-label">&nbsp</div>
+    <div class="progress-message">&nbsp</div>
+
+</div>
+<div class="button" data-pauseanim="bar">Pause</div> -->
 
     <script>    
+
+    // Input object
+
+    var data = {
+        sections: {
+          number: 5,
+          names: ['First section', 'Second section', 'Thurd section', 'First section', 'First section'],
+          isLoaded: false
+        },
+        isPopup: false
+    }
     
     $(document).ready( function() {
       
@@ -106,12 +158,82 @@
         // setTimeout (function() {
         //     progressBar.addClass('activation');
         // }, 3000);
+        function buildProgressBar (data) {
+            // take number of sections
 
-        $('.button').on('click', function(){
-            //#bar2 .progress-bar -> all uls in the #bar2 container (including uls nested in other elements)
-            //#bar2>div.progress-bar -> only direct children
+            var numberSections = data.sections.number;
+
+            // calculate average sections width TODO - make better later
+
+            var width = 100/ numberSections;
+            console.log(width);
+
+            var mainContainer = $('<div>');
+            mainContainer.addClass('main-container');
+
+            $('body').append(mainContainer);
+
+            var barContainer = $('<div>');
+            barContainer.addClass('bar-container');
+
+            mainContainer.append(barContainer);
+
+            var progressContainer = $('<ul>');
+            progressContainer.addClass('progress-container');
+            progressContainer.attr('id', 'bar');
+
+            var order = 1;
+            data.sections.names.forEach(section => {
+                var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%  height: 100%`);
+                var divItem = $('<div>').addClass('progress-bar');
+
+                listItem.append(divItem);
+                progressContainer.append(listItem);
+
+                order ++;              
+            });
+
+            barContainer.append(progressContainer);
+
+            var progressLabel = $('<div>').addClass('progress-label').html('&nbsp');
+            var progressMessage = $('<div>').addClass('progress-message').html('Loading ...');
+
+            barContainer.append(progressLabel);
+            barContainer.append(progressMessage);
+
+            // Add label that we can later change by:
+ 
+             var progressValue = 0;
+
+             let label = $('.progress-label');
+             label.html(progressValue + '%');
+
+             var message = ''; // take from configuration
+
+             let messageContainer = $('.progress-message');
+             messageContainer.html('Loading' + message);
+
+            //  var button = $('<div>').addClass('button');
+            //  button.attr('data-pauseanim', 'bar');
+            //  button.html('Pause');
+            //  mainContainer.append(button);
+
+            return progressConfig = {
+                // return necessary objects here
+                progressContainer: progressContainer
+            }
+
+        }
+
+        buildProgressBar(data);
+
+        function loadProgress(progressConfig) {
             var targetId = "#" + $(this).attr("data-pauseanim");
-            var currentId = $(targetId).attr("data-currentIndx");
+            console.log(targetId);
+
+            
+            var currentId = progressConfig.progressContainer.attr("data-currentIndx");
+            console.log(currentId);
 
             let progressBar = $($($('#bar').find("[data-section='"+ currentId +"']")[0]).find('.progress-bar')[0]);
            
@@ -125,9 +247,39 @@
 
             progressBar.addClass('activation');
             progressBar.css("animation-play-state", "running");
+            // progressBar.html("15%");
 
             $(targetId).attr("data-currentIndx", +currentId + 1)
-        })
+        }
+
+        loadProgress();
+
+        // $('.button').on('click', function(){
+        //     //#bar2 .progress-bar -> all uls in the #bar2 container (including uls nested in other elements)
+        //     //#bar2>div.progress-bar -> only direct children
+        //     var targetId = "#" + $(this).attr("data-pauseanim");
+        //     var currentId = $(targetId).attr("data-currentIndx");
+
+        //     let progressBar = $($($('#bar').find("[data-section='"+ currentId +"']")[0]).find('.progress-bar')[0]);
+           
+        //     if(progressBar == null){
+        //         return;
+        //     }
+        //     console.log(progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running");
+        //     if(progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running"){
+        //         return;
+        //     } 
+
+        //     progressBar.addClass('activation');
+        //     progressBar.css("animation-play-state", "running");
+        //     // progressBar.html("15%");
+
+        //     $(targetId).attr("data-currentIndx", +currentId + 1)
+        //     // progressBar.html("");
+
+
+            
+        // })
     });
 
     </script>
