@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>       -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style> 
+        #barContainer {
+        margin-left: 30%;
+        margin-top: 20%;
+    }
+   
+    </style>    
+
+    <script>    
+
+        var progressLoaded = 25;
+
+        var barContainer = $('<div>')
+            .attr('id', 'barContainer')
+        barContainer.attr('class', 'progress') // bootstrap class
+        barContainer.attr('style', 'position: centered')
+        barContainer.attr('style', 'width: 30%')
+        
+        
+        // $('#barContainer').center();
+
+        var progressBar = $("<div>")
+            .attr('id', 'progressBar')
+            progressBar.attr('class', 'progress-bar') // bootstrap class
+            progressBar.attr('role', 'progressbar') // bootstrap class
+            progressBar.attr('aria-valuemin', '0') // bootstrap class
+            progressBar.attr('aria-valuemax', '100') // bootstrap class
+
+            progressBar.attr('aria-valuenow', '25') // bootstrap class - shows the progress
+            progressBar.attr('style', 'width: 25%') // shows the progress
+
+            progressBar.text(""+ progressLoaded + '%') // adding label
+                       
+        barContainer.append(progressBar);
+
+            $('body').append(barContainer)
+
+            // ajax start handler
+
+            $( document ).ajaxStart(function() {
+  $( ".log" ).text( "Triggered ajaxStart handler." );
+});
+
+    
+    </script>
+
+</body>
+
+</html>
+
+
+
+</body>
+</html>
+

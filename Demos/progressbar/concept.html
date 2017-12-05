@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+    .progress-container {
+        margin: 0px;
+        padding: 0px;
+        width: 300px;
+        height: 20px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        font-size: 0;
+
+    }
+    .progress-bar {
+        display: inline-block;
+        width: 0%;
+        height: 100%;
+        background-color: #3A73B0;
+        font-size: 16px;
+    }
+
+    .section {
+        height: 100%;
+        display: inline-block;
+    }
+
+    .activation {
+        animation-name: progess-bar;
+        animation-duration: 4s;
+        animation-play-state: paused;
+        animation-fill-mode: forwards;
+        
+    }
+
+    .button {
+        width: 50px;
+        height: 20px;
+        background-color: gray;
+        margin-top: 50px;
+        border-radius: 5px;
+        color: white;
+    }
+    
+    @keyframes jumping-bar{
+        0% {width: 0%;}
+        50% {width: 100%;}   
+        100% {width: 0%;}    
+    }
+    
+    @keyframes progess-bar{
+        from {width: 0%;}
+        to {width: 100%;} 
+    }
+
+
+    @-webkit-keyframes progess-bar{
+        from {width: 0%;}
+        to {width: 100%;} 
+    }
+
+    @-moz-keyframes progess-bar {
+        from {width: 0%;}
+        to {width: 100%;} 
+    }
+
+    @-o-keyframes progess-bar{
+        from {width: 0%;}
+        to {width: 100%;} 
+    }
+    </style>
+
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>     
+
+    <ul id="bar" class="progress-container" data-currentIndx = "1">
+        <li class="section" data-section="1"  style="width:50%; height:100%;"><span class="progress-bar"></span></li>
+        <li class="section" data-section="2" style="width:50%; height:100%"><span class="progress-bar"></span></li>    
+    </ul>
+
+    <div class="button" data-pauseanim="bar">Pause</div>
+
+    <script>    
+    
+    $(document).ready( function() {
+      
+
+        // setTimeout (function() {
+        //     let progressBar = $($($('#bar').find("[data-section='1']")[0]).find('.progress-bar')[0]);
+        //     progressBar.addClass('activation');
+        // }, 100);
+
+        // setTimeout (function() {
+        //     progressBar.addClass('activation');
+        // }, 3000);
+
+        $('.button').on('click', function(){
+            //#bar2 .progress-bar -> all uls in the #bar2 container (including uls nested in other elements)
+            //#bar2>div.progress-bar -> only direct children
+            var targetId = "#" + $(this).attr("data-pauseanim");
+            var currentId = $(targetId).attr("data-currentIndx");
+
+            let progressBar = $($($('#bar').find("[data-section='"+ currentId +"']")[0]).find('.progress-bar')[0]);
+           
+            if(progressBar == null){
+                return;
+            }
+            console.log(progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running");
+            if(progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running"){
+                return;
+            } 
+
+            progressBar.addClass('activation');
+            progressBar.css("animation-play-state", "running");
+
+            $(targetId).attr("data-currentIndx", +currentId + 1)
+        })
+    });
+
+    </script>
+</body>
+</html>
+
+

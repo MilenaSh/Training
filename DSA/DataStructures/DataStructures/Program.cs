@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,22 +43,8 @@ namespace DataStructures
             testList.Add("Sample string2");
             testList.Add("Sample string3");
 
-            
-
-           Console.WriteLine( testList.Remove("Sample string2"));
-
-           
-
-            testList.IndexOf("Sample string");
-        
-
-            // Console.WriteLine(testList.IndexOf("Sample string"));
-
-           //  Console.WriteLine(testList.Contains("Sample string"));
-
-            testList.Clear();
-
-            //Console.WriteLine(testList);
+          // Console.WriteLine( testList.Remove("Sample string2"));
+          //  testList.IndexOf("Sample string");
 
 
 
@@ -82,11 +69,22 @@ namespace DataStructures
 
             // create custom dictionaries
 
-           // var myTestDictionary = new MyDictionary<string, string>();
-           // myTestDictionary.Add("Milena", "5");
-          //  myTestDictionary.Add("Plamen", "6");
+            // var myTestDictionary = new MyDictionary<string, string>();
+            // myTestDictionary.Add("Milena", "5");
+            //  myTestDictionary.Add("Plamen", "6");
 
-          //  Console.WriteLine(myTestDictionary);
+            var testDictionary = new MyDictionary<string, string>();
+
+            testDictionary.Add("student", "petar");
+
+            testDictionary.Add("pupil", "milena");
+
+          //  testDictionary.Remove("pupil");
+
+            Console.WriteLine(testDictionary.Count());
+           
+
+            var test = new Hashtable<string,string>
 
         }
     }

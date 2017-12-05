@@ -1,0 +1,19 @@
+﻿@using MVCExample.Web.Models.Superheroes
+
+@model SuperHeroeDetailedViewModel
+
+<div>
+    @Html.ActionLink("Edit", "Update", new { id = Model.Id })
+    <h1>My name is: @Model.Name</h1>
+    @if (Model.IsAlien)
+    {
+        <p> I am an Alien</p>
+    }
+    else
+    {
+        <p> I am from the planet Earth</p>
+    }
+    <p> My real name is @Model.RealName</p>
+    <p> I am @Model.RealAge years old</p>
+    <p> Keep it secret</p>
+</div>

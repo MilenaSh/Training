@@ -1,0 +1,89 @@
+﻿@model MVCExample.Web.Models.Superheroes.SuperHeroeCreateViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@*@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")*@
+@Scripts.Render("~/bundles/jquery")
+@*@Scripts.Render("~/bundles/bootstrap")*@
+<style>
+    .label {
+        color: black;
+    }
+</style>
+@using (Html.BeginForm("Create", "Superheroes", FormMethod.Post, new { id = "create-superhero", encoding = "multipart/form-data", enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => Model.Name, "SuperHero Name", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.TextBoxFor(m => Model.Name, htmlAttributes: new { @class = "text-input" })
+        @*</div>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => Model.SecretIdentityName, "Real Name", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.TextBoxFor(m => Model.SecretIdentityName, htmlAttributes: new { @class = "text-input" })
+        @*</div>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => Model.SecretIdentityage, "Real Age", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.TextBoxFor(m => Model.SecretIdentityage, htmlAttributes: new { @class = "text-input", @type = "number" })
+        @*</div>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => Model.CityName, "City to Defend", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.TextBoxFor(m => Model.CityName, htmlAttributes: new { @class = "text-input" })
+        @*</div>*@
+    </div>
+    <input type="submit" name="Create" value="Create" />
+}
+
+<script>
+    $.ajax({
+        method: 'POST',
+        url: '/Cities/GetCities',
+        dataType: 'json',
+        data: { pattern: 'o' }
+    }).done(function (data) {
+        //console.log(data);
+    })
+
+    //$.ajax({
+    //    method: 'GET',
+    //    url: '/Cities/GetCities',
+    //    dataType: 'json',
+    //}).done(function (data) {
+    //    console.log(data);
+    //})
+
+    $(function () {
+        $("#CityName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    method: "GET",
+                    url: "/Cities/GetCities",
+                    contentType: "application/jsonp",
+                    data: {
+                        pattern: request.term
+                    }
+                }).done(function (data) {
+                    console.log(data);
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Name,
+                            value: item.Name,
+                        }
+                    }));
+                });
+            },
+            minLength: 0
+        });
+    });
+
+
+</script>
+

@@ -1,0 +1,73 @@
+﻿@model MVCExample.Web.Models.Superheroes.SuperHeroeUpdateViewModel
+
+
+@{
+    ViewBag.Title = "Update";
+}
+
+@*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+@Scripts.Render("~/bundles/jquery")
+@*@Scripts.Render("~/bundles/bootstrap")*@
+<style>
+    .label {
+        color: black;
+    }
+</style>
+@using (Html.BeginForm("Update", "Superheroes", FormMethod.Post, new { id = "update-superhero", encoding = "multipart/form-data", enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => Model.Name, "SuperHero Name", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.EditorFor(m => Model.Name)
+        @*</div>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => Model.SecretIdentityName, "Real Name", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.EditorFor(m => Model.SecretIdentityName)
+        @*</div>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => Model.SecretIdentityage, "Real Age", htmlAttributes: new { @class = "label" })
+        @*<div class="col-md-10">*@
+        @Html.EditorFor(m => Model.SecretIdentityage)
+        @*</div>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => Model.CityName, "City to Defend", htmlAttributes: new { @class = "label" })
+       
+        @Html.EditorFor(m => Model.CityName)
+        
+    </div>
+    <input type="submit" name="Update" value="Update" />
+}
+
+<script>
+    $(function () {
+        $("#CityName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    method: "GET",
+                    url: "/Cities/GetCities",
+                    contentType: "application/jsonp",
+                    data: {
+                        pattern: request.term
+                    }
+                }).done(function (data) {
+                    console.log(data);
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.Name,
+                            value: item.Name,
+                        }
+                    }));
+                });
+            },
+            minLength: 0
+        });
+    });
+
+</script>
+
+
