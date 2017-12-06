@@ -29,6 +29,7 @@
             font-size: 0;
             border-radius: 5px;
             display: inline-block;
+            z-index: -2;
         }
         
         .progress-bar {
@@ -195,9 +196,9 @@
                 isLoaded: false,
             }
         ]
-    
-    $(document).ready( function() {
-      
+
+        $(document).ready(function() {
+
 
             // setTimeout (function() {
             //     let progressBar = $($($('#bar').find("[data-section='1']")[0]).find('.progress-bar')[0]);
@@ -235,16 +236,16 @@
                 progressContainer.attr('data-currentIndx', '1');
 
                 var order = 1;
-                
-                    for (var section in data) {
-                        var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%; height:100%;`);
-                        var divItem = $('<div>').addClass('progress-bar');
 
-                        listItem.append(divItem);
-                        progressContainer.append(listItem);
+                for (var section in data) {
+                    var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%; height:100%;`);
+                    var divItem = $('<div>').addClass('progress-bar');
 
-                        order++;
-                    }
+                    listItem.append(divItem);
+                    progressContainer.append(listItem);
+
+                    order++;
+                }
 
                 // data.sections.names.forEach(section => {
                 //     var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%  height: 100%`);
@@ -294,17 +295,19 @@
             var index = 0;
 
             function start() {
-           
-          //  for (var item in data) {
 
-           // for (i = 1; i <= Object.keys(data).length; i++) {
+                //  for (var item in data) {
+
+                // for (i = 1; i <= Object.keys(data).length; i++) {
 
                 var estimatedDuration = data[index].estimatedTime;
+                //console.log(index);
+                console.log(estimatedDuration);
 
                 // var currentId = progressContainer.attr("data-currentIndx");
 
-               // console.log(currentId);
-              
+                // console.log(currentId);
+
                 var currentBarSection = $($($('#bar').find("[data-section='" + currentId + "']")[0]).find('.progress-bar')[0]);
                 // console.log(currentBarSection)
 
@@ -312,7 +315,7 @@
                     return;
                 }
 
-               // console.log(currentBarSection.hasClass('activation') && currentBarSection.css("animation-play-state") == "running");
+                // console.log(currentBarSection.hasClass('activation') && currentBarSection.css("animation-play-state") == "running");
                 if (currentBarSection.hasClass('activation') && currentBarSection.css("animation-play-state") == "running") {
                     return;
                 }
@@ -325,20 +328,13 @@
                 let messageContainer = $('.progress-message');
                 messageContainer.html('Loading ' + data[index].name);
 
-                currentId ++;
-                index +=1;
+                currentId++;
+                index++;
 
-              //  }
-                
-                
-                // load the comtent based on estimated time
+                if (index <= 5) {
+                    startNextSection();
+                }
 
-                // use estimated time for animation-duration
-
-                // display loading message
-
-                // continue to next one once finished
-                startNextSection();
 
             }
 
@@ -346,15 +342,15 @@
 
             function startNextSection() {
 
-                
-                window.addEventListener("animationend", function(){
-                    console.log('ended')
+                window.addEventListener("animationend", function() {
+                    console.log('ended');
+                    start();
                 });
-                              
+
                 // attach event listener for the end of the animation
 
                 // play the next section once the animation is done
-                
+
             }
 
             function stopForError() {
@@ -366,7 +362,7 @@
 
 
 
-             });
+        });
     </script>
 </body>
 
