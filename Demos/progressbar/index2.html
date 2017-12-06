@@ -67,7 +67,7 @@
         
         .activation {
             animation-name: progess-bar;
-            animation-duration: 4s;
+            animation-duration: 2s;
             animation-play-state: paused;
             animation-fill-mode: forwards;
             /* -webkit-animation-name: progress-bar;
@@ -159,28 +159,42 @@
     <script>
         // Input object
 
-        var data = {
-            sections: {
-                number: 5,
-                names: ['First section', 'Second section', 'Thurd section', 'First section', 'First section'],
-                isLoaded: false
+        // var data = { 
+        //     sections: {
+        //         number: 5,
+        //         names: ['First section', 'Second section', 'Thurd section', 'First section', 'First section'],
+        //         isLoaded: false
+        //     },
+        //     isPopup: false
+        // }
+
+        var data = [
+            sectionOne = {
+                name: "First section",
+                estimatedTime: 3,
+                isLoaded: false,
             },
-            isPopup: false
-        }
-
-        $(document).ready(function() {
-
-
-    var data = {
-        sections: {
-          number: 5,
-          names: ['First section', 'Second section', 'Thurd section', 'First section', 'First section'],
-          isLoaded: false
-        },
-        isPopup: false
-    }
-
-    
+            sectionTwo = {
+                name: "Second section",
+                estimatedTime: 4,
+                isLoaded: false,
+            },
+            sectionThree = {
+                name: "Thurd section",
+                estimatedTime: 2,
+                isLoaded: false,
+            },
+            sectionFour = {
+                name: "Fourth section",
+                estimatedTime: 3,
+                isLoaded: false,
+            },
+            sectionFive = {
+                name: "Fifth section",
+                estimatedTime: 2,
+                isLoaded: false,
+            }
+        ]
     
     $(document).ready( function() {
       
@@ -199,12 +213,11 @@
             function buildProgressBar(data) {
                 // take number of sections
 
-                var numberSections = data.sections.number;
+                var numberSections = Object.keys(data).length;
 
                 // calculate average sections width TODO - make better later
 
                 var width = 100 / numberSections;
-                console.log(width);
 
                 var mainContainer = $('<div>');
                 mainContainer.addClass('main-container');
@@ -222,15 +235,26 @@
                 progressContainer.attr('data-currentIndx', '1');
 
                 var order = 1;
-                data.sections.names.forEach(section => {
-                    var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%  height: 100%`);
-                    var divItem = $('<div>').addClass('progress-bar');
+                
+                    for (var section in data) {
+                        var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%; height:100%;`);
+                        var divItem = $('<div>').addClass('progress-bar');
 
-                    listItem.append(divItem);
-                    progressContainer.append(listItem);
+                        listItem.append(divItem);
+                        progressContainer.append(listItem);
 
-                    order++;
-                });
+                        order++;
+                    }
+
+                // data.sections.names.forEach(section => {
+                //     var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%  height: 100%`);
+                //     var divItem = $('<div>').addClass('progress-bar');
+
+                //     listItem.append(divItem);
+                //     progressContainer.append(listItem);
+
+                //     order++;
+                // });
 
                 barContainer.append(progressContainer);
 
@@ -266,61 +290,83 @@
 
             buildProgressBar(data);
 
+            var currentId = 1;
+            var index = 0;
 
-            function loadProgress() {
-                var targetId = "#" + $(this).attr("data-pauseanim");
-                // console.log(targetId);
+            function start() {
+           
+          //  for (var item in data) {
 
+           // for (i = 1; i <= Object.keys(data).length; i++) {
 
-                var currentId = progressContainer.attr("data-currentIndx");
-                console.log(currentId);
+                var estimatedDuration = data[index].estimatedTime;
 
-                let progressBar = $($($('#bar').find("[data-section='" + currentId + "']")[0]).find('.progress-bar')[0]);
+                // var currentId = progressContainer.attr("data-currentIndx");
 
-                if (progressBar == null) {
+               // console.log(currentId);
+              
+                var currentBarSection = $($($('#bar').find("[data-section='" + currentId + "']")[0]).find('.progress-bar')[0]);
+                // console.log(currentBarSection)
+
+                if (currentBarSection == null) {
                     return;
                 }
-                console.log(progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running");
-                if (progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running") {
+
+               // console.log(currentBarSection.hasClass('activation') && currentBarSection.css("animation-play-state") == "running");
+                if (currentBarSection.hasClass('activation') && currentBarSection.css("animation-play-state") == "running") {
                     return;
                 }
 
-                progressBar.addClass('activation');
-                progressBar.css("animation-play-state", "running");
-                // progressBar.html("15%");
+                // start given section 
+                currentBarSection.addClass('activation');
+                currentBarSection.css("animation-play-state", "running");
+                currentBarSection.css("animation-duration", `${estimatedDuration}s`);
 
-                $(targetId).attr("data-currentIndx", +currentId + 1)
+                let messageContainer = $('.progress-message');
+                messageContainer.html('Loading ' + data[index].name);
+
+                currentId ++;
+                index +=1;
+
+              //  }
+                
+                
+                // load the comtent based on estimated time
+
+                // use estimated time for animation-duration
+
+                // display loading message
+
+                // continue to next one once finished
+                startNextSection();
+
             }
 
-            loadProgress();
+            start();
 
-            // $('.button').on('click', function(){
-            //     //#bar2 .progress-bar -> all uls in the #bar2 container (including uls nested in other elements)
-            //     //#bar2>div.progress-bar -> only direct children
-            //     var targetId = "#" + $(this).attr("data-pauseanim");
-            //     var currentId = $(targetId).attr("data-currentIndx");
+            function startNextSection() {
 
-            //     let progressBar = $($($('#bar').find("[data-section='"+ currentId +"']")[0]).find('.progress-bar')[0]);
+                
+                window.addEventListener("animationend", function(){
+                    console.log('ended')
+                });
+                              
+                // attach event listener for the end of the animation
 
-            //     if(progressBar == null){
-            //         return;
-            //     }
-            //     console.log(progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running");
-            //     if(progressBar.hasClass('activation') && progressBar.css("animation-play-state") == "running"){
-            //         return;
-            //     } 
+                // play the next section once the animation is done
+                
+            }
 
-            //     progressBar.addClass('activation');
-            //     progressBar.css("animation-play-state", "running");
-            //     // progressBar.html("15%");
+            function stopForError() {
+                // if we have an error - display message with the type of error - on which section it is stuck
 
-            //     $(targetId).attr("data-currentIndx", +currentId + 1)
-            //     // progressBar.html("");
+            }
 
 
 
-            // })
-        });
+
+
+             });
     </script>
 </body>
 
