@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .main-container {
+            position: relative;
+            z-index: -1;
+        }
+        
+        .bar-container {
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .progress-container {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 300px;
+            height: 20px;
+            border: 1px solid gray;
+            white-space: nowrap;
+            font-size: 0;
+            border-radius: 5px;
+            display: inline-block;
+            z-index: -2;
+        }
+        
+        .progress-bar {
+            text-align: center;
+            display: inline-block;
+            width: 0%;
+            height: 100%;
+            background-color: #3A73B0;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .section {
+            height: 100%;
+            display: inline-block;
+            white-space: nowrap;
+            z-index: -1;
+        }
+        
+        .progress-label {
+            margin: 0px;
+            padding: 0px;
+            padding-top: 2px;
+            padding-left: 5px;
+            height: 100%;
+            font-size: 14px;
+            color: white;
+            z-index: 1;
+        }
+        
+        .progress-message {
+            margin-top: 10px;
+            margin-left: 5px;
+            color: #45454A;
+        }
+        
+        .activation {
+            animation-name: progess-bar;
+            animation-duration: 2s;
+            animation-play-state: paused;
+            animation-fill-mode: forwards;
+            /* -webkit-animation-name: progress-bar;
+        -webkit-animation-duration: 4s;
+        -webkit-animation-play-state: paused;
+        -webkit-animation-fill-mode: forwards;  */
+        }
+        
+        .button {
+            margin-top: 50px;
+            width: 50px;
+            height: 20px;
+            background-color: gray;
+            color: white;
+            border-radius: 3px;
+            padding: 3px;
+        }
+        
+        @keyframes jumping-bar {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 100%;
+            }
+            100% {
+                width: 0%;
+            }
+        }
+        
+        @keyframes progess-bar {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        
+        @-webkit-keyframes progess-bar {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        
+        @-moz-keyframes progess-bar {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+        
+        @-o-keyframes progess-bar {
+            from {
+                width: 0%;
+            }
+            to {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+
+    <!-- <div class="main-container">
+    <div class="bar-container">
+    <ul id="bar" class="progress-container" data-currentIndx = "1">
+            <li class="section" data-section="1"  style="width:25%; height:100%;"><div class="progress-bar"></div></li>
+            <li class="section" data-section="2" style="width:25%; height:100%"><div class="progress-bar"></div></li>
+            <li class="section" data-section="3" style="width:25%; height:100%"><div class="progress-bar"></div></li>
+            <li class="section" data-section="4" style="width:25%; height:100%"><div class="progress-bar"></div></li>           
+    </ul>
+</div>
+    <div class="progress-label">&nbsp</div>
+    <div class="progress-message">&nbsp</div>
+
+</div>
+<div class="button" data-pauseanim="bar">Pause</div> -->
+
+    <script>
+        // Input object
+
+        // var data = { 
+        //     sections: {
+        //         number: 5,
+        //         names: ['First section', 'Second section', 'Thurd section', 'First section', 'First section'],
+        //         isLoaded: false
+        //     },
+        //     isPopup: false
+        // }
+
+        var data = [
+            sectionOne = {
+                name: "First section",
+                estimatedTime: 3,
+                isLoaded: false,
+            },
+            sectionTwo = {
+                name: "Second section",
+                estimatedTime: 4,
+                isLoaded: false,
+            },
+            sectionThree = {
+                name: "Thurd section",
+                estimatedTime: 2,
+                isLoaded: false,
+            },
+            sectionFour = {
+                name: "Fourth section",
+                estimatedTime: 3,
+                isLoaded: false,
+            },
+            sectionFive = {
+                name: "Fifth section",
+                estimatedTime: 2,
+                isLoaded: false,
+            }
+        ]
+
+        $(document).ready(function() {
+
+
+            // setTimeout (function() {
+            //     let progressBar = $($($('#bar').find("[data-section='1']")[0]).find('.progress-bar')[0]);
+            //     progressBar.addClass('activation');
+            // }, 100);
+
+
+            // setTimeout (function() {
+            //     progressBar.addClass('activation');
+            // }, 3000);
+            // var progressContainer;
+
+            function buildProgressBar(data) {
+                // take number of sections
+
+                var numberSections = Object.keys(data).length;
+
+                // calculate average sections width TODO - make better later
+
+                var width = 100 / numberSections;
+
+                var mainContainer = $('<div>');
+                mainContainer.addClass('main-container');
+
+                $('body').append(mainContainer);
+
+                var barContainer = $('<div>');
+                barContainer.addClass('bar-container');
+
+                mainContainer.append(barContainer);
+
+                progressContainer = $('<ul>');
+                progressContainer.addClass('progress-container');
+                progressContainer.attr('id', 'bar');
+                progressContainer.attr('data-currentIndx', '1');
+
+                var order = 1;
+
+                for (var section in data) {
+                    var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%; height:100%;`);
+                    var divItem = $('<div>').addClass('progress-bar');
+
+                    listItem.append(divItem);
+                    progressContainer.append(listItem);
+
+                    order++;
+                }
+
+                // data.sections.names.forEach(section => {
+                //     var listItem = $('<li>').addClass('section').attr('data-section', `${order}`).attr('style', `width:${width}%  height: 100%`);
+                //     var divItem = $('<div>').addClass('progress-bar');
+
+                //     listItem.append(divItem);
+                //     progressContainer.append(listItem);
+
+                //     order++;
+                // });
+
+                barContainer.append(progressContainer);
+
+                var progressLabel = $('<div>').addClass('progress-label').html('&nbsp');
+                var progressMessage = $('<div>').addClass('progress-message').html('Loading ...');
+
+                barContainer.append(progressLabel);
+                barContainer.append(progressMessage);
+
+                // Add label that we can later change by:
+
+                var progressValue = 0;
+
+                let label = $('.progress-label');
+                label.html(progressValue + '%');
+
+                var message = ''; // take from configuration
+
+                let messageContainer = $('.progress-message');
+                messageContainer.html('Loading' + message);
+
+                //  var button = $('<div>').addClass('button');
+                //  button.attr('data-pauseanim', 'bar');
+                //  button.html('Pause');
+                //  mainContainer.append(button);
+
+                // return progressConfig = {
+                //     // return necessary objects here
+                //     progressContainer: progressContainer
+                // }
+
+            }
+
+
+
+            var currentId = 1;
+            var index = 0;
+
+            function start() {
+
+                //  for (var item in data) {
+
+                // for (i = 1; i <= Object.keys(data).length; i++) {
+
+                var estimatedDuration = data[index].estimatedTime;
+                //console.log(index);
+                console.log(estimatedDuration);
+
+                // var currentId = progressContainer.attr("data-currentIndx");
+
+                // console.log(currentId);
+
+                var currentBarSection = $($($('#bar').find("[data-section='" + currentId + "']")[0]).find('.progress-bar')[0]);
+                // console.log(currentBarSection)
+
+                if (currentBarSection == null) {
+                    return;
+                }
+
+                // console.log(currentBarSection.hasClass('activation') && currentBarSection.css("animation-play-state") == "running");
+                if (currentBarSection.hasClass('activation') && currentBarSection.css("animation-play-state") == "running") {
+                    return;
+                }
+
+                // start given section 
+                currentBarSection.addClass('activation');
+                currentBarSection.css("animation-play-state", "running");
+                currentBarSection.css("animation-duration", `${estimatedDuration}s`);
+
+                let messageContainer = $('.progress-message');
+                messageContainer.html('Loading ' + data[index].name);
+
+                currentId++;
+                index++;
+
+                if (index <= 5) {
+                    startNextSection();
+                }
+
+
+            }
+
+            buildProgressBar(data);
+            start();
+
+            function startNextSection() {
+
+            //     $(currentBarSection).one('animationend', function(){
+            //     start(data, currentId+1);
+            // })
+
+                $(window).one("animationend", function() {
+                    console.log('ended');
+                    start();
+                });
+
+                // attach event listener for the end of the animation
+
+                // play the next section once the animation is done
+
+            }
+
+            function stopForError() {
+                // if we have an error - display message with the type of error - on which section it is stuck
+
+            }
+
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>
