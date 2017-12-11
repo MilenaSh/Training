@@ -1,0 +1,112 @@
+@font-face {
+    font-family: MontserratBold;
+    src: url("./fonts/Montserrat-Bold.ttf")
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url("./fonts/Montserrat-Regular.ttf")
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+.sitetriks-wrapper {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    min-height: 100%;
+    font-size: 10px;
+}
+
+.header-wrapper {
+    width: 100%;
+}
+
+.wrapper-center {
+
+}
+
+.header-white {
+    /* height: 10vh; */
+    height: 55px;
+}
+
+.logo-container {
+    width: 80px;
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 5%;
+    background-color: #008cef;
+}
+
+.try-button {
+    width: 40px;
+    height: 1em;
+    margin-right: 5%;
+    float: right;
+    background-color: #123e7a;
+    border-width: 0px 2px 2px 0px;
+    border-style: solid;
+    border-color: #418acd;
+    color: white;
+}
+
+.header-blue {
+    background: #114382;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#0c56a2, #114382);
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#0c56a2, #114382);
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#0c56a2, #114382);
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#0c56a2, #114382);
+    /* Standard syntax */
+    /* background-color: #104a8f; */
+    /* height: 5vh; */
+    height: 25px;
+    border-bottom: 2px solid #0069cb;
+    color: #f8f2eb;
+    position: relative;
+}
+
+.slogan {
+    position: absolute;
+    top: 30%;
+    margin: 0 auto;
+    max-width: 40%;
+    vertical-align: middle;
+    font-size: 1.1em;
+    font-family: Montserrat;
+    position: relative;
+}
+
+.jumbotron-section {
+    /* TODO */
+    min-height: 280px;
+    background-color: black;
+}
+
+.detailed-menu {
+    /* TODO */
+    min-height: 900px;
+    background-color: #124e7a;
+}
+
+.technology-list {
+    /* TODO */
+    min-height: 400px;
+    background-color: #5fb6fd;
+}
+
+.features-section {
+    min-height: 310px;
+    background-color: #124e7a;
+}
+
+footer {
+    min-height: 90px;
+}
