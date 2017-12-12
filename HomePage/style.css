@@ -39,7 +39,7 @@ header {
 }
 
 .main {
-    margin-top: 80px;
+    margin-top: 100px;
 }
 .wrapper-center {
 
@@ -90,14 +90,14 @@ header {
     height: 25px;
     border-bottom: 2px solid #0069cb;
     color: #f8f2eb;
-    position: relative;
+    /* position: relative; */
 }
 
 .slogan {
     position: absolute;
     top: 30%;
     margin: 0 auto;
-    max-width: 40%;
+    max-width: 30%;
     vertical-align: middle;
     font-size: 1.1em;
     font-family: Montserrat;
@@ -106,27 +106,67 @@ header {
 
 .jumbotron-section {
     /* TODO */
-    min-height: 280px;
+    /* min-height: 280px; */
+    min-height: 640px;
     background-color: black;
+}
+
+.dandelion-menu {
+    /* min-height: 280px; */
+    height: 640px;
+    width: 640px;
+    background-color: gray;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* dandelion style */
+
+/* .area {
+    width: 400px;
+    height: 400px;
+    background: red;
+} */
+
+.element {
+    position: absolute;
+    background-color: blue;
+    color: white;
+    z-index: 2;
+}
+
+.line {
+    position: absolute;
+    background-color: #0069cb;
+    z-index: 1;
+}
+
+.hover {
+    border: 2px solid purple;
 }
 
 .detailed-menu {
     /* TODO */
-    min-height: 900px;
+    min-height: 1800px;
     background-color: #124e7a;
 }
 
+/* Snowflake */
+
+
 .technology-list {
     /* TODO */
-    min-height: 400px;
+    min-height: 800px;
     background-color: #5fb6fd;
 }
 
 .features-section {
-    min-height: 310px;
+    min-height: 610px;
     background-color: #124e7a;
 }
 
 footer {
-    min-height: 90px;
+    min-height: 180px;
 }
+
+
