@@ -32,6 +32,8 @@ header {
     position: fixed;
     top: 0;
     background-color: white;
+    z-index: 3; 
+    /* to cover the dandelion */
 }
 
 .header-wrapper {
@@ -42,7 +44,7 @@ header {
     margin-top: 100px;
 }
 .wrapper-center {
-
+    margin: 0 30%;
 }
 
 .header-white {
@@ -113,11 +115,12 @@ header {
 
 .dandelion-menu {
     /* min-height: 280px; */
-    height: 640px;
-    width: 640px;
+    height: 800px;
+    width: 800px;
     background-color: gray;
     margin: 0 auto;
     position: relative;
+    z-index: 1;
 }
 
 /* dandelion style */
@@ -137,7 +140,7 @@ header {
 
 .line {
     position: absolute;
-    background-color: #0069cb;
+    background-color: #64a4d9;
     z-index: 1;
 }
 
@@ -147,11 +150,99 @@ header {
 
 .detailed-menu {
     /* TODO */
+    margin: 0;
+    padding: 0;
     min-height: 1800px;
     background-color: #124e7a;
+
 }
 
-/* Snowflake */
+.wrapper-detailed-menu {
+    margin: 0 20%;
+    /* display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap; */
+}
+
+.middle-box {
+    width: 450px;
+    height: 90px;
+    border: 3px solid #57a9ef;
+    margin: 0 auto;
+    margin-top: 100px;
+    text-align: center;
+    padding-top: 18px;
+    margin-bottom: 100px;
+}
+
+.entreprice-features {
+    color: white;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+.entreprice-description {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* .item {
+    height: 500px; 
+    border: 2px solid black; 
+} */
+
+
+.before-item{
+    height: 80px; 
+    border: 2px solid #2962a1;
+}
+
+.row .before-item:first {
+    border: none;
+}
+
+.item-left {
+    /* height: 500px;  */
+    /* border-right: 2px solid #2f6bab; */
+    border: 2px solid #2962a1;
+}
+
+.item-right {
+    /* height: 500px;  */
+    border: 2px solid #2962a1;  
+
+}
+
+.icon {
+    width: 100px;
+    margin: 0 auto;
+}
+.tree-item{
+    text-align: center;
+    align-content: center;
+    margin-bottom: 120px;
+
+}
+
+.item-header {
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 28px;
+    margin-bottom: 34px;
+}
+
+.item-body {
+    display: inline-block;
+    color: white;
+    font-size: 12px;
+    text-align: left;
+    width: 80%;
+
+}
 
 
 .technology-list {
