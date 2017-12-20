@@ -8,6 +8,11 @@
     src: url("./fonts/Montserrat-Regular.ttf")
 }
 
+@font-face {
+    font-family: DashDigital;
+    src: url("./fonts/Dash_Digital-7.ttf")
+}
+
 html {
     margin: 0;
     padding: 0;
@@ -146,57 +151,66 @@ header {
     position: absolute;
     /* background-color: blue; */
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     text-transform: uppercase;
     text-align: center;
     text-shadow: 1px 1px gray;
-
+    font-family: DashDigital;
     /* border: 1px solid black; */
-    z-index: 2;
+    z-index: 1;
 }
 
-.environment {
+[data-order="0"] {
     margin-left: -50px;
     color: #68a5d7;
 }
 
-.version {
+[data-order="2"]{
     color: #9993be;
 }
 
-.auto {
+[data-order="3"] {
     color: #8296b1;
 }
 
-.multilingual {
+[data-order="4"] {
  color: #b7bbd5;
 }
 
-.forums {
+[data-order="5"]{
     color: #8f9eb2;
 }
 
-.modular {
+[data-order="6"] {
     color: #96b2d8;
 }
 
-.blogs {
+[data-order="7"]{
     color: #8eafdc;
 }
 
-.DOS {
+[data-order="8"] {
     color: #8d9db2;
 }
-.tagging {
+
+[data-order="9"] {
     color: #b8bcd9;
 }
 
-.dynamic {
+[data-order="10"]{
     color: #93a9c7;
 }
 
-.content {
+[data-order="11"] {
     color: #a9a6bb;
+}
+
+[data-order="12"] {
+    color: #8a9eb9;
+}
+
+[data-order="1"] {
+    color: #7494c1;
 }
 
 .line {
@@ -207,6 +221,16 @@ header {
 
 .hover {
     border: 2px solid purple;
+    z-index: 2;
+}
+
+.small-circle {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    border: 1px solid #70baf6;
+    background-color: #123e7a;
+
 }
 
 .detailed-menu {
