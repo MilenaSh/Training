@@ -35,38 +35,57 @@ function addLine(selector, lines) {
     }
 }
 
-// function addcircle(selector, lines) {
-//     var parent = $(selector);
 
-//     var lines = GetLine(2, lines);
+function addCircle(size, angle, ratioOfRadius, selector, lines) {
+    
+        var parent = $(selector);
+        var maxRadius = parent.width() / 2;
+        var angleInRad = DegreesToRad(angle);
+    
+        var radius = maxRadius * ratioOfRadius;
+      var top = maxRadius - Math.sin(angleInRad) * radius - size / 2;
+        var left = maxRadius + Math.cos(angleInRad) * radius - size / 2;
+    
+        // var additionalClass = ["0", "30", "60", "80", "90", "120", "150", "180","210", "240", "270", "300", "330", "350"]
+    
 
+     var smallCircle = $("<div>")
+        .addClass("small-circle")
+            .css("top", top)
+            .css("left", left);
+    
+            smallCircle.attr("data-order", index);
+             
+            console.log(index);
+    
+            index++;
+    
+        //[{ x: 200, y: 200 }, { x: 100, y: 150 }, { x: left, y: top }]
+         var lines = GetLine(3, lines);
+    
+    
+        for (var i = 0; i < lines.length; i++) {
+            parent.append(lines[i])
+        }
+    
+        $(smallCircle).hover(function () {
+    
+            for (var i = 0; i < lines.length; i++) {
+                lines[i].addClass('hover');
+            }
+        }, function () {
+            for (var i = 0; i < lines.length; i++) {
+                lines[i].removeClass('hover');
+            };
+        });
+    
+        parent.append(smallCircle);
+    
+        for (var i = 0; i < lines.length; i++) {
+            parent.append(lines[i]);
+        }
+    }
 
-//     var smallCircle = $("<div>")
-//         .addClass("small-circle");
-
-
-//     for (var i = 0; i < lines.length; i++) {
-//         parent.append(lines[i])
-//             .addClass('diamondLine');
-//     }
-
-//     // $(".diamondLine").hover(function () {
-
-//     //     for (var i = 0; i < lines.length; i++) {
-//     //         lines[i].addClass('hover');
-//     //     }
-//     // }, function () {
-//     //     for (var i = 0; i < lines.length; i++) {
-//     //         lines[i].removeClass('hover');
-//     //     };
-//     // });
-
-//     parent.append(smallCircle);
-
-//     for (var i = 0; i < lines.length; i++) {
-//         parent.append(lines[i]);
-//     }
-// }
 
 var index = 0;
 
@@ -79,10 +98,6 @@ function addElement(size, angle, ratioOfRadius, selector, text, lines) {
     var radius = maxRadius * ratioOfRadius;
     var top = maxRadius - Math.sin(angleInRad) * radius - size / 2;
     var left = maxRadius + Math.cos(angleInRad) * radius - size / 2;
-
-    // var additionalClass = getFirstWord(text);
-
-    // additionalClass = additionalClass.replace(/^\((.+)\)$/, '$1');
 
     // var additionalClass = ["0", "30", "60", "80", "90", "120", "150", "180","210", "240", "270", "300", "330", "350"]
 
@@ -101,8 +116,6 @@ function addElement(size, angle, ratioOfRadius, selector, text, lines) {
         console.log(index);
 
         index++;
-
-        
 
     //[{ x: 200, y: 200 }, { x: 100, y: 150 }, { x: left, y: top }]
     var lines = GetLine(3, lines);
@@ -170,8 +183,6 @@ function GetLine(width, points) {
             break;
         }
     }
-
-
 
     return segments;
 }
@@ -300,6 +311,11 @@ addElement(60, 145, 1, ".dandelion-menu", "content import tool", tenThirty); // 
 addElement(70, 130, 0.9, ".dandelion-menu", "search (Google integration)", eleven); // 11
 
 
+
+
+// addCircle(70, 150, 1.1, ".dandelion-menu", "search (Google integration)", tenThirty); 
+
+
 //          function addElement(size, angle, ratioOfRadius, selector, text, lines)
 
 // 
@@ -315,6 +331,7 @@ var upperMainLine = [
     radialToXY(1 * 400, 0, 400, 760),
     radialToXY(1.5 * 400, 0, 400, 800)
 ];
+
 
 var downMainLine = [
     radialToXY(1.5 * 400, 180, 400, 800),
