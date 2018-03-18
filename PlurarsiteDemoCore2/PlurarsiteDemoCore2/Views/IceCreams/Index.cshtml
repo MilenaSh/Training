@@ -1,0 +1,15 @@
+﻿@model PlurarsiteDemoCore2.ViewModels.IceCreamViewModel
+
+<body>
+    <h2>@Model.Title</h2>
+
+    @foreach (var icecream in Model.IceCreams)
+    {
+        <div>
+            <h2>@icecream.Name</h2>
+            <h3>@icecream.Description</h3>
+
+        </div>
+
+    }
+</body>

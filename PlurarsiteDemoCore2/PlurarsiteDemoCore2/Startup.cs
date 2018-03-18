@@ -21,6 +21,7 @@ namespace PlurarsiteDemoCore2
             // creates a new instance of MockPie Repository every time we call Ipie repository
 
             services.AddTransient<IPieRepository, MockPieRepository>();
+            services.AddTransient<IIceCreamRepository, MockIcereamRepository>();
 
             // services.AddSingleton - same instance is always going to be returned.
             // services.AddScoped - returns instances within the scope. Per request it will always return the same instance.
@@ -42,5 +43,7 @@ namespace PlurarsiteDemoCore2
                 await context.Response.WriteAsync("Hello World!");
             });
         }
+
+
     }
 }
