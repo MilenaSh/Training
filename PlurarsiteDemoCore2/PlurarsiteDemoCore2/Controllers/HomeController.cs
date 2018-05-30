@@ -11,10 +11,14 @@ namespace PlurarsiteDemoCore2.Controllers
     public class HomeController : Controller
     {
         private readonly IPieRepository _pieRepository;
+        private readonly IIceCreamRepository _iceCreamRepository;
 
-        public HomeController(IPieRepository pieRepository)
+       // private object _iceCreamRepository;
+
+        public HomeController(IPieRepository pieRepository, IIceCreamRepository iceCreamRepository)
         {
             _pieRepository = pieRepository;
+            _iceCreamRepository = iceCreamRepository;
         }
 
         public IActionResult Index()
@@ -22,14 +26,19 @@ namespace PlurarsiteDemoCore2.Controllers
 
 
             var pies = _pieRepository.GetAllPies().OrderBy(p => p.Name);
+            var iceCream = _iceCreamRepository.GetAllIceCream().OrderBy(p => p.Name);
+
 
             var homeViewModel = new HomeViewModel
             {
                 Title = "Welcome to Bethanies Pie shop",
-                Pies = pies.ToList()
+                Pies = pies.ToList(),
+                IceCream = iceCream.ToList()
             };
 
             return View(homeViewModel);
         }
+
+
     }
 }

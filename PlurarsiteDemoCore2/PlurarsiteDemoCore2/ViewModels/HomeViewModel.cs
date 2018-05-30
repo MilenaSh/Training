@@ -11,5 +11,8 @@ namespace PlurarsiteDemoCore2.ViewModels
         public string Title { get; set; }
 
         public List<Pie> Pies { get; set; }
+
+        public List<IceCream> IceCream { get; set; }
+
     }
 }

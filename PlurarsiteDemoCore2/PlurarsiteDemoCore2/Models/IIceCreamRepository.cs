@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PlurarsiteDemoCore2.Models
 {
-    public  interface IIceCreamRepository
+    public interface IIceCreamRepository
     {
         IEnumerable<IceCream> GetAllIceCream();
         IceCream GetById(int iceCreamId);

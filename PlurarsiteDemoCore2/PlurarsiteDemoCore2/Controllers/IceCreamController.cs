@@ -19,17 +19,17 @@ namespace PlurarsiteDemoCore2.Controllers
 
         public IActionResult Index()
         {
-            //var iceCream = _iceCreamRepository.GetAllIceCream().OrderBy(i => i.Name);
+            var iceCream = _iceCreamRepository.GetAllIceCream().OrderBy(i => i.Name);
 
-            //var iceCreamViewModel = new IceCreamViewModel
-            //{
-            //    Title = "My icecreams",
-            //    IceCreams = iceCream.ToList()
-            //};
+            var iceCreamViewModel = new IceCreamViewModel
+            {
+                Title = "My icecreams",
+                IceCreams = iceCream.ToList()
+            };
 
-            //return View(iceCreamViewModel);
+            return View(iceCreamViewModel);
 
-            return View();
+            //return View();
 
         }
     }
